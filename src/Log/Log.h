@@ -26,11 +26,23 @@ public:
         ERROR,
     };
 
+    class SourceFile {
+    public:
+        explicit SourceFile(const char* filename) : data_(filename) {
+            const char* slash = strrchr(filename, '/');
+            if (slash) data_ = slash + 1;
+            size_ = static_cast<int>(strlen(data_));
+        }
+
+        const char* data_;
+        int size_;
+    };
+
     void init(const char* path = "./log/", int split_lines = 5000000, int max_queue_size = 1000);
     static Log * getInstance();
     static void FlushLogThread();
 
-    void write(int level, const char *format, ...);
+    void write(int level, SourceFile file, int line, const char *format, ...); 
     void flush();
     bool isOpen() const { return m_isOpen; }
 
@@ -63,8 +75,8 @@ private:
     do { \
         Log* log = Log::getInstance(); \
         if (log->isOpen()){ \
-            log->write(level, format, ##__VA_ARGS__); \
-            log->flush(); \
+            log->write(level, Log::SourceFile(__FILE__), __LINE__, format, ##__VA_ARGS__); \
+	    log->flush(); \
         } \
     } while(false);
 

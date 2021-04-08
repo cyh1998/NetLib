@@ -67,7 +67,7 @@ Log *Log::getInstance() {
     return &m_pInstance;
 }
 
-void Log::write(int level, const char *format, ...) {
+void Log::write(int level, SourceFile file, int line, const char *format, ...) {
     struct timeval now = {0, 0};
     gettimeofday(&now, nullptr);
     time_t timer = now.tv_sec;
@@ -115,10 +115,10 @@ void Log::write(int level, const char *format, ...) {
         lock_guard<mutex> locker(m_mutex);
         ++m_lineCount;
         va_start(vaList, format);
-        int n = snprintf(m_buf, 48, "%s %04d-%02d-%02d %02d:%02d:%02d.%06ld ",
+        int n = snprintf(m_buf, 256, "%s %04d-%02d-%02d %02d:%02d:%02d.%06ld [%s:%d] ",
                 logType.c_str(), time.tm_year + 1900, time.tm_mon + 1, time.tm_mday,
-                time.tm_hour, time.tm_min, time.tm_sec, now.tv_usec);
-        int m = vsnprintf(m_buf + n, LOG_BUF_SIZE - 1, format, vaList);
+                time.tm_hour, time.tm_min, time.tm_sec, now.tv_usec, file.data_, line);
+	int m = vsnprintf(m_buf + n, LOG_BUF_SIZE - 1, format, vaList);
         m_buf[n + m] = '\n';
         m_buf[n + m + 1] = '\0';
         m_logStr += m_buf; //将临时缓冲区内容添加到日志缓冲区
