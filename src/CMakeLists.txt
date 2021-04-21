@@ -1,4 +1,5 @@
 set(base_SRCS
+    Base/Noncopyable.h
     Log/BlockQueue.h
     Log/Log.h
     Log/Log.cpp
