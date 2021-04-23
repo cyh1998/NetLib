@@ -1,5 +1,11 @@
 set(base_SRCS
     Base/Noncopyable.h
+    Net/EventLoop.h
+    Net/EventLoop.cpp
+    Net/Channel.h
+    Net/Channel.cpp
+    Net/Epoller.h
+    Net/Epoller.cpp
     Log/BlockQueue.h
     Log/Log.h
     Log/Log.cpp

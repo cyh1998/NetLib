@@ -2,6 +2,7 @@
 Linux下的C++网络库
 
 ## 功能
+* 基于Epoll实现的Reactor模式
 * 利用阻塞队列实现的异步日志模块
 * 基于pthread封装实现的线程对象
 * 实现模板类线程池与函数对象线程池
@@ -13,6 +14,10 @@ Linux下的C++网络库
 ├── src
 │   ├── Base
 │   │   └── Noncopyable     不可拷贝基类
+│   ├── Net
+│   │   ├── Channel         IO事件分发
+│   │   ├── Epoller         IO多路复用
+│   │   └── EventLoop       事件循环器
 │   ├── Log
 │   │   ├── BlockQueue      阻塞队列
 │   │   └── Log             日志

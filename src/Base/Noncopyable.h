@@ -12,8 +12,8 @@ public:
     const Noncopyable& operator=(const Noncopyable&) = delete;
 
 protected:
-    Noncopyable() = delete;
-    ~Noncopyable() = delete;
+    Noncopyable() = default;
+    ~Noncopyable() = default;
 };
 
 #endif //NETLIB_NONCOPYABLE_H
