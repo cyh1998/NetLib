@@ -25,7 +25,11 @@ public:
     int getEvents() const { return m_events; }
     void setRevents(int revt) { m_revents = revt; }
     bool isNoneEvent() const { return m_events == s_noneEvent; }
-
+    
+    void enableReading() { m_events |= s_readEvent; update(); }
+    void enableWriting() { m_events |= s_writeEvent; update(); }
+    void disableAll() { m_events = s_noneEvent; update(); }
+    
     int getIndex() const { return m_index; }
     void setIndex(int idx) { m_index = idx; }
 
@@ -35,9 +39,9 @@ private:
     void update();
 
 private:
-    static const int s_noneEvent;
-    static const int s_readEvent;
-    static const int s_writeEvent;
+    static const uint32_t s_noneEvent;
+    static const uint32_t s_readEvent;
+    static const uint32_t s_writeEvent;
 
     EventLoop* m_loop;
     const int  m_fd;

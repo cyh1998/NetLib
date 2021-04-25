@@ -6,9 +6,9 @@
 #include "EventLoop.h"
 #include "Channel.h"
 
-const int Channel::s_noneEvent = 0;
-const int Channel::s_readEvent = EPOLLIN | EPOLLPRI;
-const int Channel::s_writeEvent = EPOLLOUT;
+const uint32_t Channel::s_noneEvent = 0;
+const uint32_t Channel::s_readEvent = EPOLLIN | EPOLLPRI;
+const uint32_t Channel::s_writeEvent = EPOLLOUT;
 
 Channel::Channel(EventLoop* loop, int fd) :
     m_loop(loop),
