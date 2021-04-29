@@ -22,7 +22,7 @@ public:
 
     void poll(int timeoutMs, ChannelList* activeChannels);
     void updateChannel(Channel* channel);
-    void asserInLoopThread() { m_ownerLoop->asserInLoopThread(); }
+    void assertInLoopThread() { m_ownerLoop->assertInLoopThread(); }
 
 private:
     void update(int operation, Channel* channel) const;

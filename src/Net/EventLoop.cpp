@@ -36,7 +36,7 @@ EventLoop* EventLoop::getEventLoopOfCurrentThread() {
 
 void EventLoop::loop() {
     if (!m_looping) {
-        asserInLoopThread();
+        assertInLoopThread();
         m_looping = true;
         m_quit = false;
 
@@ -63,7 +63,7 @@ void EventLoop::abortNoInLoopThread() {
 
 void EventLoop::updateChannel(Channel *channel) {
     if (channel->ownerLoop() == this) {
-        asserInLoopThread();
+        assertInLoopThread();
         m_epoller->updateChannel(channel);
     }
 }

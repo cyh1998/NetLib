@@ -26,7 +26,7 @@ public:
 
     void loop();
     void quit();
-    void asserInLoopThread() {
+    void assertInLoopThread() {
         if (!isInLoopThread()) {
             abortNoInLoopThread();
         }

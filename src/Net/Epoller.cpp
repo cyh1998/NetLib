@@ -42,7 +42,7 @@ void Epoller::poll(int timeoutMs, ChannelList* activeChannels) {
 }
 
 void Epoller::updateChannel(Channel *channel) {
-    Epoller::asserInLoopThread();
+    Epoller::assertInLoopThread();
     const int index = channel->getIndex();
     int fd = channel->fd();
     LOG_INFO("Epoller update: fd = %d events = %d index = %d", fd, channel->getEvents(), index);

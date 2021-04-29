@@ -1,6 +1,13 @@
 # NetLib
 Linux下的C++网络库
 
+## 环境
+```
+Linux  5.4.0
+gcc    7.5.0
+Ubuntu 18.04.4
+```
+
 ## 功能
 * 基于Epoll实现的Reactor模式
 * 利用阻塞队列实现的异步日志模块
@@ -14,14 +21,19 @@ Linux下的C++网络库
 ├── src
 │   ├── Base
 │   │   └── Noncopyable      不可拷贝基类
+│   ├── Log
+│   │   ├── BlockQueue       阻塞队列
+│   │   └── Log              日志
 │   ├── Net
 │   │   ├── Channel          IO事件分发
 │   │   ├── Epoller          IO多路复用
 │   │   ├── EventLoop        事件循环
 │   │   └── EventLoopThread  事件循环线程
-│   ├── Log
-│   │   ├── BlockQueue       阻塞队列
-│   │   └── Log              日志
+│   ├── Socket
+│   │   ├── Acceptor         连接接收类
+│   │   ├── InetAddress      网络地址封装
+│   │   ├── Socket           文件描述符 RAII 封装
+│   │   └── SocketOps        socket操作类
 │   ├── Thread
 │   │   ├── FuncThreadPool   函数对象线程池
 │   │   ├── ThreadObject     线程对象
