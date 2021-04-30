@@ -19,7 +19,9 @@ set(base_SRCS
         Socket/Socket.cpp
         Socket/SocketOps.h
         Socket/SocketOps.cpp
-        Thread/ThreadPool.h
+        Socket/TcpServer.h
+        Socket/TcpServer.cpp
+	Thread/ThreadPool.h
         Thread/ThreadObject.h
         Thread/ThreadObject.cpp
         Thread/FuncThreadPool.h
