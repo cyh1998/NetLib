@@ -21,7 +21,7 @@ void sockets::listen(int sockfd) {
 
 int sockets::accept(int sockfd, struct sockaddr_in* addr) {
     socklen_t addrlen = sizeof(*addr);
-    int connfd = ::accept4(sockfd, (struct sockaddr*)&addr, &addrlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
+    int connfd = ::accept4(sockfd, (struct sockaddr*)addr, &addrlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
     if (connfd < 0) {
         //...
     }

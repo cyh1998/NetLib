@@ -21,11 +21,27 @@ InetAddress::InetAddress(const std::string& ip, uint16_t port) {
     m_addr.sin_port = htobe16(port);
 }
 
+InetAddress::InetAddress(const sockaddr_in &addr) :
+    m_addr(addr)
+{
+}
+
 const struct sockaddr *InetAddress::getSockAddr() const {
     return (const struct sockaddr*)&m_addr;
     // return reinterpret_cast<const struct sockaddr*>(&m_addr);
 }
 
 void InetAddress::setSockAddr(struct sockaddr_in& addr) {
-    addr = m_addr;
+    m_addr = addr;
 }
+
+std::string InetAddress::getIpStr() const {
+    char buf[64] = "";
+    inet_ntop(AF_INET, &m_addr.sin_addr, buf, static_cast<socklen_t>(sizeof(buf)));
+    return buf;
+}
+
+uint16_t InetAddress::getPort() const {
+    return be16toh(m_addr.sin_port);
+}
+
