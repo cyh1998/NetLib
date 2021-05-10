@@ -1,19 +1,21 @@
 # NetLib
-Linux下的C++网络库
+Linux 下的 C++ 网络库  
+包括基本的网络库、日志模块、线程封装、数据库操作等等
 
 ## 环境
 ```
+Ubuntu 18.04.4
 Linux  5.4.0
 gcc    7.5.0
-Ubuntu 18.04.4
+MySQL  5.7.31
 ```
-
 ## 功能
 * 基于Epoll实现的Reactor模式
 * 利用阻塞队列实现的异步日志模块
 * 基于pthread封装实现的线程对象
-* 实现模板类线程池与函数对象线程池
-* 实现基于升序链表的定时器、时间轮定时器、时间堆定时器
+* 模板类线程池与函数对象线程池
+* 基于升序链表的定时器、时间轮定时器、时间堆定时器
+* 基于queue实现的简单数据库连接池
 
 ## 目录
 ```
@@ -35,6 +37,9 @@ Ubuntu 18.04.4
 │   │   ├── Socket           文件描述符 RAII 封装
 │   │   ├── SocketOps        socket操作类
 │   │   └── TcpServer        Tcp Server
+│   ├── Sql
+│   │   ├── SqlConnPool      数据库连接池
+│   │   └── SqlHandler       数据库操作类
 │   ├── Thread
 │   │   ├── FuncThreadPool   函数对象线程池
 │   │   ├── ThreadObject     线程对象

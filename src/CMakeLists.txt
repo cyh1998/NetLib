@@ -21,6 +21,10 @@ set(base_SRCS
         Socket/SocketOps.cpp
         Socket/TcpServer.h
         Socket/TcpServer.cpp
+        Sql/SqlConnPool.h
+        Sql/SqlConnPool.cpp
+        Sql/SqlHandler.h
+        Sql/SqlHandler.cpp
 	Thread/ThreadPool.h
         Thread/ThreadObject.h
         Thread/ThreadObject.cpp
@@ -38,4 +42,4 @@ add_library(lib_base ${base_SRCS})
 
 find_package(Threads)
 
-target_link_libraries(lib_base ${CMAKE_THREAD_LIBS_INIT} -lrt)
+target_link_libraries(lib_base ${CMAKE_THREAD_LIBS_INIT} -lrt libmysqlclient.so)
