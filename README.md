@@ -1,6 +1,6 @@
 # NetLib
 Linux 下的 C++ 网络库  
-包括基本的网络库、日志模块、线程封装、数据库操作等等
+包括基本的网络模块、日志模块、线程模块、数据库模块等等
 
 ## 环境
 ```
@@ -44,10 +44,11 @@ MySQL  5.7.31
 │   │   ├── FuncThreadPool   函数对象线程池
 │   │   ├── ThreadObject     线程对象
 │   │   └── ThreadPool       模板类线程池
-│   └── Timer (待更新)
-│       ├── TimerHeap        时间堆
-│       ├── TimerList        基于升序链表的定时器
-│       └── TimerWheel       时间轮
+│   └── Timer
+│       ├── Timer            定时器类
+│       ├── TimerHeap        时间堆定时器(弃用)
+│       ├── TimerList        升序链表定时器(弃用)
+│       └── TimerWheel       时间轮定时器(弃用)
 ├── main.cpp
 └── README.md
 ```

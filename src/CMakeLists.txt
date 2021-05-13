@@ -25,17 +25,13 @@ set(base_SRCS
         Sql/SqlConnPool.cpp
         Sql/SqlHandler.h
         Sql/SqlHandler.cpp
-	Thread/ThreadPool.h
+        Thread/ThreadPool.h
         Thread/ThreadObject.h
         Thread/ThreadObject.cpp
         Thread/FuncThreadPool.h
         Thread/FuncThreadPool.cpp
-        Timer/TimerHeap.h
-        Timer/TimerHeap.cpp
-        Timer/TimerList.h
-        Timer/TimerList.cpp
-        Timer/TimerWheel.h
-        Timer/TimerWheel.cpp
+        Timer/Timer.h
+        Timer/Timer.cpp
     )
 
 add_library(lib_base ${base_SRCS})
