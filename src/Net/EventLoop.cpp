@@ -67,3 +67,11 @@ void EventLoop::updateChannel(Channel *channel) {
         m_epoller->updateChannel(channel);
     }
 }
+
+void EventLoop::removeChannel(Channel *channel) {
+    if (channel->ownerLoop() == this) {
+        assertInLoopThread();
+        m_epoller->removeChannel(channel);
+    }
+}
+

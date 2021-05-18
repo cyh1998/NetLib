@@ -32,6 +32,8 @@ set(base_SRCS
         Thread/FuncThreadPool.cpp
         Timer/Timer.h
         Timer/Timer.cpp
+        Timer/TimerQueue.h
+        Timer/TimerQueue.cpp
     )
 
 add_library(lib_base ${base_SRCS})

@@ -35,6 +35,12 @@ void Channel::handleEvent() {
     }
 }
 
+void Channel::remove() {
+    if (isNoneEvent()) {
+        m_loop->removeChannel(this);
+    }
+}
+
 void Channel::update() {
     m_loop->updateChannel(this);
 }

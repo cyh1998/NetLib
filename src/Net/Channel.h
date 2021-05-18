@@ -34,6 +34,7 @@ public:
     void setIndex(int idx) { m_index = idx; }
 
     EventLoop* ownerLoop() { return m_loop; }
+    void remove();
 
 private:
     void update();

@@ -22,7 +22,9 @@ public:
         return Timestamp(seconds * kMicroSecondsPerSecond + tv.tv_usec);
     }
 
+    static Timestamp invalid() { return Timestamp(); }
     int64_t MicroSecondsSinceEpoch() const { return m_microSecondsSinceEpoch; }
+    bool valid() const { return m_microSecondsSinceEpoch > 0; }
 
 public:
     static const int kMicroSecondsPerSecond = 1000 * 1000;
@@ -30,6 +32,15 @@ public:
 private:
     int64_t m_microSecondsSinceEpoch;
 };
+
+inline bool operator<(Timestamp lhs, Timestamp rhs) {
+    return lhs.MicroSecondsSinceEpoch() < rhs.MicroSecondsSinceEpoch();
+}
+
+inline bool operator==(Timestamp lhs, Timestamp rhs)
+{
+    return lhs.MicroSecondsSinceEpoch() == rhs.MicroSecondsSinceEpoch();
+}
 
 inline Timestamp AddTime(Timestamp timestamp, double seconds) {
     int64_t delta = static_cast<int64_t>(seconds * Timestamp::kMicroSecondsPerSecond);
@@ -43,6 +54,8 @@ public:
     Timer(TimerCallback cb, Timestamp when, double interval);
 
     void run() const { m_callback(); }
+
+    void restart(Timestamp now);
 
     Timestamp expiration() const  { return m_expiration; }
     bool repeat() const { return m_repeat; }

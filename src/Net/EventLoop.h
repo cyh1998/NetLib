@@ -34,6 +34,7 @@ public:
 
     bool isInLoopThread() const { return m_threadId == syscall(SYS_gettid); }
     void updateChannel(Channel* channel);
+    void removeChannel(Channel* channel);
 
 private:
     void abortNoInLoopThread();
