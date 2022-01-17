@@ -10,10 +10,12 @@
 #include <mutex>
 // #include <semaphore.h>
 #include <mysql/mysql.h>
+#include "Singleton.h"
 
 class SqlConnPool {
 public:
-    static SqlConnPool *GetInstance();
+    SqlConnPool();
+    ~SqlConnPool();
 
     void Init(const std::string& host, int port,
               const std::string& user, const std::string& pwd,
@@ -24,15 +26,13 @@ public:
     void FreeConnObj(MYSQL *conn);
 
 private:
-    SqlConnPool();
-    ~SqlConnPool();
-
-private:
     std::queue<MYSQL *> m_connQue;
 
     int m_max_conn;
     std::mutex m_mutex;
     // sem_t m_semId;
 };
+
+using g_SqlConnPoolMgr = Singleton<SqlConnPool>;
 
 #endif //NETLIB_SQLCONNPOOL_H

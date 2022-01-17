@@ -1,5 +1,10 @@
+include_directories(
+        PRIVATE ./Base
+)
+
 set(base_SRCS
         Base/Noncopyable.h
+        Base/Singleton.h
         Log/BlockQueue.h
         Log/Log.h
         Log/Log.cpp
@@ -34,7 +39,7 @@ set(base_SRCS
         Timer/Timer.cpp
         Timer/TimerQueue.h
         Timer/TimerQueue.cpp
-    )
+        )
 
 add_library(lib_base ${base_SRCS})
 

@@ -64,11 +64,6 @@ void Log::init(const char* path, int split_lines, int max_queue_size) {
     }
 }
 
-Log *Log::getInstance() {
-    static Log m_pInstance;
-    return &m_pInstance;
-}
-
 void Log::write(int level, SourceFile file, int line, const char *format, ...) {
     struct timeval now = {0, 0};
     gettimeofday(&now, nullptr);
@@ -140,7 +135,7 @@ void Log::flush() {
 }
 
 void Log::FlushLogThread() {
-    Log::getInstance()->AsyncWrite();
+    g_LogMgr::instance()->AsyncWrite();
 }
 
 void Log::AsyncWrite() {

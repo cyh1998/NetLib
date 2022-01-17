@@ -14,11 +14,6 @@ SqlConnPool::~SqlConnPool() {
     ClosePool();
 }
 
-SqlConnPool *SqlConnPool::GetInstance() {
-    static SqlConnPool sqlConnPool;
-    return &sqlConnPool;
-}
-
 void SqlConnPool::Init(const std::string& host, int port, const std::string& user,
         const std::string& pwd, const std::string& db_name, int conn_size) {
     for (int i = 0; i < conn_size; i++) {

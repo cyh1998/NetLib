@@ -14,6 +14,7 @@
 #include <sys/stat.h> //mkdir
 #include <sys/time.h> //gettimeofday
 #include "BlockQueue.h"
+#include "Singleton.h"
 
 class ThreadObject;
 
@@ -38,8 +39,10 @@ public:
         int size_;
     };
 
+    Log();
+    virtual ~Log();
+
     void init(const char* path = "./log/", int split_lines = 5000000, int max_queue_size = 1000);
-    static Log * getInstance();
     static void FlushLogThread();
 
     void write(int level, SourceFile file, int line, const char *format, ...); 
@@ -47,8 +50,6 @@ public:
     bool isOpen() const { return m_isOpen; }
 
 private:
-    Log();
-    virtual ~Log();
     void AsyncWrite();
     void FlushBuff();
 
@@ -71,9 +72,11 @@ private:
 
 };
 
+using g_LogMgr = Singleton<Log>;
+
 #define LOG_BASE(level, format, ...) \
     do { \
-        Log* log = Log::getInstance(); \
+        Log* log = g_LogMgr::instance(); \
         if (log->isOpen()){ \
             log->write(level, Log::SourceFile(__FILE__), __LINE__, format, ##__VA_ARGS__); \
 	    log->flush(); \
