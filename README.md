@@ -23,6 +23,7 @@ MySQL  5.7.31
 ├── src
 │   ├── Base
 │   │   └── Noncopyable      不可拷贝基类
+│   │   └── Singleton        单例模板类
 │   ├── Log
 │   │   ├── BlockQueue       阻塞队列
 │   │   └── Log              日志
