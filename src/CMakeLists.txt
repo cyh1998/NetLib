@@ -1,8 +1,9 @@
 include_directories(
         PRIVATE ./Base
-)
+        )
 
 set(base_SRCS
+        Base/MutexLock.h
         Base/Noncopyable.h
         Base/Singleton.h
         Log/BlockQueue.h
