@@ -3,6 +3,7 @@ include_directories(
         )
 
 set(base_SRCS
+        Base/Condition.h
         Base/MutexLock.h
         Base/Noncopyable.h
         Base/Singleton.h

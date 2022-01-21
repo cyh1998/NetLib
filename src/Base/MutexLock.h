@@ -30,6 +30,9 @@ public:
     }
 
 private:
+    friend class Condition;
+
+private:
     pthread_mutex_t m_mutex;
 };
 
