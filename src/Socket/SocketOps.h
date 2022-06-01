@@ -8,7 +8,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-namespace sockets {
+namespace sockets
+{
     void bind(int sockfd, const struct sockaddr* addr);
 
     void listen(int sockfd);
@@ -18,6 +19,8 @@ namespace sockets {
     void close(int sockfd);
 
     int  createNonblockingSocket();
+
+    struct sockaddr_in6 getLocalAddr(int sockfd);
 }
 
 #endif //NETLIB_SOCKETOPS_H

@@ -20,12 +20,15 @@ set(base_SRCS
         Net/Epoller.cpp
         Socket/Acceptor.h
         Socket/Acceptor.cpp
+        Socket/Callbacks.h
         Socket/InetAddress.h
         Socket/InetAddress.cpp
         Socket/Socket.h
         Socket/Socket.cpp
         Socket/SocketOps.h
         Socket/SocketOps.cpp
+        Socket/TcpConnection.cpp
+        Socket/TcpConnection.h
         Socket/TcpServer.h
         Socket/TcpServer.cpp
         Sql/SqlConnPool.h

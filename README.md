@@ -39,6 +39,7 @@ MySQL  5.7.31
 │   │   ├── InetAddress      网络地址封装
 │   │   ├── Socket           文件描述符 RAII 封装
 │   │   ├── SocketOps        socket操作类
+│   │   ├── TcpConnection    Tcp连接类
 │   │   └── TcpServer        Tcp Server
 │   ├── Sql
 │   │   ├── SqlConnPool      数据库连接池

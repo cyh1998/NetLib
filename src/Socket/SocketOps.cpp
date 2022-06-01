@@ -20,7 +20,7 @@ void sockets::listen(int sockfd) {
 }
 
 int sockets::accept(int sockfd, struct sockaddr_in* addr) {
-    socklen_t addrlen = sizeof(*addr);
+    socklen_t addrlen = static_cast<socklen_t>(sizeof (*addr));
     int connfd = ::accept4(sockfd, (struct sockaddr*)addr, &addrlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
     if (connfd < 0) {
         //...
@@ -42,4 +42,15 @@ int sockets::createNonblockingSocket() {
         LOG_ERROR("Create Nonblocking Socket error!")
     }
     return sockfd;
+}
+
+struct sockaddr_in6 sockets::getLocalAddr(int sockfd) {
+    sockaddr_in6 localaddr{};
+    memset(&localaddr, 0, sizeof(localaddr));
+    socklen_t addrlen = static_cast<socklen_t>(sizeof (localaddr));
+    if (::getsockname(sockfd, (struct sockaddr*)&localaddr, &addrlen) < 0)
+    {
+        LOG_ERROR("GetLocalAddr error!")
+    }
+    return localaddr;
 }
