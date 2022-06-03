@@ -57,8 +57,10 @@ void EventLoop::quit() {
     m_quit = true;
 }
 
-void EventLoop::abortNoInLoopThread() {
-    LOG_INFO("EventLoop abortNoInLoopThread");
+void EventLoop::runInLoop(Functor cb) {
+    if (isInLoopThread()) {
+        cb();
+    }
 }
 
 void EventLoop::updateChannel(Channel *channel) {
@@ -75,3 +77,6 @@ void EventLoop::removeChannel(Channel *channel) {
     }
 }
 
+void EventLoop::abortNoInLoopThread() {
+    LOG_INFO("EventLoop abortNoInLoopThread");
+}

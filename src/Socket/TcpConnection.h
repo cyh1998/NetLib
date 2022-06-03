@@ -26,12 +26,16 @@ public:
     ~TcpConnection();
 
 public:
+    bool connected() const { return m_state == kConnected; }
     void setConnectionCallback(const ConnectionCallback& cb)
     { m_connectionCallback = cb; }
+
+    void connectEstablished();
 
 private:
     enum StateE { kConnecting, kConnected };
     void handleRead();
+    void setState(StateE s) { m_state = s; }
 
 private:
     EventLoop* m_loop;

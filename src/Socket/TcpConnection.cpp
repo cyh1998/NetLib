@@ -5,6 +5,7 @@
 #include "TcpConnection.h"
 #include "../Net/Channel.h"
 #include "../Socket/Socket.h"
+#include "../Net/EventLoop.h"
 
 TcpConnection::TcpConnection(EventLoop *loop, const std::string &name, int sockfd, const InetAddress &localAddr,
                              const InetAddress &peerAddr) :
@@ -23,6 +24,13 @@ TcpConnection::~TcpConnection() {
 
 }
 
+void TcpConnection::connectEstablished() {
+    m_loop->assertInLoopThread();
+    setState(kConnected);
+    m_connectionCallback(shared_from_this());
+}
+
 void TcpConnection::handleRead() {
 
 }
+

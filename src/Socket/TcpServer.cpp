@@ -11,7 +11,8 @@
 TcpServer::TcpServer(EventLoop *loop, const InetAddress &addr, std::string name) :
     m_loop(loop),
     m_acceptor(new Acceptor(loop, addr)),
-    m_name(std::move(name))
+    m_name(std::move(name)),
+    m_started(false)
 {
     m_acceptor->setNewConnectionCallback(std::bind(&TcpServer::newConnection, this, std::placeholders::_1,
                                          std::placeholders::_2));
@@ -22,7 +23,9 @@ TcpServer::~TcpServer() {
 }
 
 void TcpServer::start() {
-
+    if (!m_started) {
+        m_loop->runInLoop(std::bind(&Acceptor::listen, m_acceptor.get()));
+    }
 }
 
 void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr) {
@@ -36,4 +39,5 @@ void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr) {
                                                             localAddr, peerAddr);
     m_connections[connName.str()] = coon;
     coon->setConnectionCallback(m_connectionCallback);
+    coon->connectEstablished();
 }

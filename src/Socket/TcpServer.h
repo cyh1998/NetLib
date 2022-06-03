@@ -19,7 +19,7 @@ using ConnectionMap = std::map<std::string, TcpConnectionPtr>;
 class TcpServer : Noncopyable
 {
 public:
-    TcpServer(EventLoop* loop, const InetAddress& addr, std::string name);
+    TcpServer(EventLoop* loop, const InetAddress& addr, std::string name = "");
     ~TcpServer();
 
     void start();
@@ -36,6 +36,7 @@ private:
     std::unique_ptr<Acceptor> m_acceptor;
 
     const std::string m_name;
+    bool m_started;
     int m_nextConnId;
     ConnectionCallback m_connectionCallback;
     ConnectionMap m_connections;

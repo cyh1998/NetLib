@@ -15,10 +15,12 @@
 
 class Epoller;
 
-class EventLoop : Noncopyable {
-public:
-    typedef std::vector<Channel*> ChannelList;
+using Functor = std::function<void()>;
+using ChannelList = std::vector<Channel*>;
 
+class EventLoop : Noncopyable
+{
+public:
     EventLoop();
     ~EventLoop();
 
@@ -31,6 +33,8 @@ public:
             abortNoInLoopThread();
         }
     }
+
+    void runInLoop(Functor cb);
 
     bool isInLoopThread() const { return m_threadId == syscall(SYS_gettid); }
     void updateChannel(Channel* channel);
