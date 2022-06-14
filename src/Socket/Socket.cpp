@@ -12,6 +12,11 @@ Socket::Socket(int fd) :
 {
 }
 
+Socket::~Socket() {
+    sockets::close(m_sockfd);
+}
+
+
 void Socket::bindAddress(const InetAddress& addr) const {
     sockets::bind(m_sockfd, addr.getSockAddr());
 }

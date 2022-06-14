@@ -29,7 +29,7 @@ void TcpServer::start() {
 }
 
 void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr) {
-    m_loop->isInLoopThread();
+    m_loop->assertInLoopThread();
     std::stringstream connName;
     connName << m_name << m_nextConnId;
     ++m_nextConnId;

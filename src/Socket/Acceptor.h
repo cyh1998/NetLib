@@ -18,7 +18,8 @@ public:
     Acceptor(EventLoop* loop, const InetAddress& addr);
     ~Acceptor();
 
-    void setNewConnectionCallback(const NewConnectionCallback& cb) { m_newConnectionCallback = cb; }
+    void setNewConnectionCallback(const NewConnectionCallback& cb)
+    { m_newConnectionCallback = cb; }
 
     void listen();
 

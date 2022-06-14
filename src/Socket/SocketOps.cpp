@@ -28,6 +28,14 @@ int sockets::accept(int sockfd, struct sockaddr_in* addr) {
     return connfd;
 }
 
+ssize_t sockets::read(int sockfd, void *buf, size_t count) {
+    return ::read(sockfd, buf, count);
+}
+
+ssize_t sockets::write(int sockfd, const void *buf, size_t count) {
+    return ::write(sockfd, buf, count);
+}
+
 void sockets::close(int sockfd) {
     int ret = ::close(sockfd);
     if (ret < 0) {

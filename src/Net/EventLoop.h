@@ -10,6 +10,7 @@
 #include <sys/syscall.h>
 #include <vector>
 #include <memory> //unique_ptr
+#include <mutex>
 #include "../Base/Noncopyable.h"
 #include "Channel.h"
 
@@ -35,6 +36,9 @@ public:
     }
 
     void runInLoop(Functor cb);
+    void queueInLoop(Functor cb);
+
+    void wakeup();
 
     bool isInLoopThread() const { return m_threadId == syscall(SYS_gettid); }
     void updateChannel(Channel* channel);
@@ -42,13 +46,23 @@ public:
 
 private:
     void abortNoInLoopThread();
+    void handleRead();
+    void doPendingFunctors();
 
 private:
     bool m_looping;
     bool m_quit;
+    bool m_callingPendingFunctors;
+
     const pid_t m_threadId;
     std::unique_ptr<Epoller> m_epoller;
     ChannelList m_activeChannels;
+
+    int m_wakeupFd;
+    std::unique_ptr<Channel> m_wakeupChannel;
+
+    std::mutex m_mutex;
+    std::vector<Functor> m_pendingFunctors;
 };
 
 #endif //NETLIB_EVENTLOOP_H
