@@ -38,9 +38,7 @@ EventLoop::EventLoop() :
         t_loopInThisThread = this;
     }
 
-    m_wakeupChannel->setReadCallback(
-            std::bind(&EventLoop::handleRead, this));
-    // we are always reading the wakeupfd
+    m_wakeupChannel->setReadCallback(std::bind(&EventLoop::handleRead, this));
     m_wakeupChannel->enableReading();
 }
 
@@ -126,7 +124,7 @@ void EventLoop::abortNoInLoopThread() {
 
 void EventLoop::handleRead() {
     uint64_t one = 1;
-    int n = sockets::read(m_wakeupFd, &one, sizeof one);
+    int n = sockets::read(m_wakeupFd, &one, sizeof(one));
     if (n != sizeof one) {
         LOG_ERROR("EventLoop::handleRead() reads %d bytes", n);
     }

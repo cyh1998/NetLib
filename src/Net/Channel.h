@@ -15,11 +15,13 @@ public:
     typedef std::function<void()> EventCallback;
 
     Channel(EventLoop* loop, int fd);
+    ~Channel();
 
     void handleEvent(); //处理文件描述符上的触发事件
     void setReadCallback(const EventCallback& cb) { m_readCallback = cb; }
     void setWriteCallback(const EventCallback& cb) { m_writeCallback = cb; }
     void setErrorCallback(const EventCallback& cb) { m_errorCallback = cb; }
+    void setCloseCallback(const EventCallback& cb) { m_closeCallback = cb; }
 
     int fd() const { return m_fd; }
     int getEvents() const { return m_events; }
@@ -53,6 +55,7 @@ private:
     EventCallback m_readCallback;  //可读事件回调
     EventCallback m_writeCallback; //可写事件回调
     EventCallback m_errorCallback; //错误事件回调
+    EventCallback m_closeCallback; //断开事件回调
 };
 
 #endif //NETLIB_CHANNEL_H

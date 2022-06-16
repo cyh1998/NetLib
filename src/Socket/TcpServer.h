@@ -24,12 +24,15 @@ public:
 
     void start();
 
-    void setConnectionCallback(const ConnectionCallback& cb) {
-        m_connectionCallback = cb;
-    }
+    void setConnectionCallback(const ConnectionCallback& cb)
+    { m_connectionCallback = cb; }
+
+    void setMessageCallback(const MessageCallback& cb)
+    { m_messageCallback = cb; }
 
 private:
     void newConnection(int sockfd, const InetAddress& peerAddr);
+    void removeConnection(const TcpConnectionPtr& conn);
 
 private:
     EventLoop* m_loop;
@@ -39,6 +42,7 @@ private:
     bool m_started;
     int m_nextConnId;
     ConnectionCallback m_connectionCallback;
+    MessageCallback m_messageCallback;
     ConnectionMap m_connections;
 };
 

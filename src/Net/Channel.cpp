@@ -20,7 +20,15 @@ Channel::Channel(EventLoop* loop, int fd) :
 
 }
 
+Channel::~Channel() {
+
+}
+
 void Channel::handleEvent() {
+    // 触发断开事件
+    if ((m_revents & EPOLLRDHUP) && !(m_revents & EPOLLIN)) {
+        if (m_closeCallback) m_closeCallback();
+    }
     // 触发错误事件
     if (m_revents & EPOLLERR) {
         if (m_errorCallback) m_errorCallback();
