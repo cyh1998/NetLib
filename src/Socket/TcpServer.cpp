@@ -4,7 +4,6 @@
 
 #include <sstream>
 #include <utility>
-#include <assert.h>
 #include "Acceptor.h"
 #include "TcpServer.h"
 #include "SocketOps.h"

@@ -20,6 +20,8 @@ set(base_SRCS
         Net/Epoller.cpp
         Socket/Acceptor.h
         Socket/Acceptor.cpp
+        Socket/Buffer.h
+        Socket/Buffer.cpp
         Socket/Callbacks.h
         Socket/InetAddress.h
         Socket/InetAddress.cpp

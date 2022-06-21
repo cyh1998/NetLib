@@ -2,6 +2,7 @@
 // Created by cyh on 2021/4/29.
 //
 
+#include <sys/uio.h> //readv
 #include "../Log/Log.h"
 #include "SocketOps.h"
 
@@ -30,6 +31,10 @@ int sockets::accept(int sockfd, struct sockaddr_in* addr) {
 
 ssize_t sockets::read(int sockfd, void *buf, size_t count) {
     return ::read(sockfd, buf, count);
+}
+
+ssize_t sockets::readv(int sockfd, const struct iovec *iov, int iovcnt) {
+    return ::readv(sockfd, iov, iovcnt);
 }
 
 ssize_t sockets::write(int sockfd, const void *buf, size_t count) {
