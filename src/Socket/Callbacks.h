@@ -7,6 +7,8 @@
 
 #include <functional>
 #include <memory>
+#include "Buffer.h"
+#include "../Timer/Timer.h"
 
 class TcpConnection;
 
@@ -14,6 +16,6 @@ using TcpConnectionPtr = std::shared_ptr<TcpConnection>;
 using ConnectionCallback = std::function<void (const TcpConnectionPtr&)>;
 using CloseCallback = std::function<void (const TcpConnectionPtr&)>;
 
-using MessageCallback = std::function<void (const TcpConnectionPtr&, const char* buf, int len)> ;
+using MessageCallback = std::function<void (const TcpConnectionPtr&, Buffer*, Timestamp)>;
 
 #endif //NETLIB_CALLBACKS_H

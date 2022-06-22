@@ -7,18 +7,20 @@
 
 #include <functional>
 #include "../Base/Noncopyable.h"
+#include "../Timer/Timer.h"
 
 class EventLoop;
 
 class Channel : Noncopyable {
 public:
-    typedef std::function<void()> EventCallback;
+    using EventCallback = std::function<void()>;
+    using ReadEventCallback = std::function<void(Timestamp)>;
 
     Channel(EventLoop* loop, int fd);
     ~Channel();
 
-    void handleEvent(); //处理文件描述符上的触发事件
-    void setReadCallback(const EventCallback& cb) { m_readCallback = cb; }
+    void handleEvent(Timestamp receiveTime); //处理文件描述符上的触发事件
+    void setReadCallback(const ReadEventCallback& cb) { m_readCallback = cb; }
     void setWriteCallback(const EventCallback& cb) { m_writeCallback = cb; }
     void setErrorCallback(const EventCallback& cb) { m_errorCallback = cb; }
     void setCloseCallback(const EventCallback& cb) { m_closeCallback = cb; }
@@ -52,7 +54,7 @@ private:
     uint32_t   m_revents; //当前活动的IO事件
     int        m_index;   //描述符的标识
 
-    EventCallback m_readCallback;  //可读事件回调
+    ReadEventCallback m_readCallback;  //可读事件回调
     EventCallback m_writeCallback; //可写事件回调
     EventCallback m_errorCallback; //错误事件回调
     EventCallback m_closeCallback; //断开事件回调

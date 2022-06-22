@@ -132,7 +132,7 @@ public:
         return m_buffer.capacity();
     }
 
-    ssize_t readFd(int fd, int* savedErrno);
+    ssize_t readFd(int fd, int & savedErrno);
 
 private:
     // 缓存区首地址

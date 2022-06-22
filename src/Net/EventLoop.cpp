@@ -6,6 +6,7 @@
 #include "EventLoop.h"
 #include "../Log/Log.h"
 #include "Epoller.h"
+#include "Channel.h"
 #include "../Socket/SocketOps.h"
 
 namespace {
@@ -58,9 +59,9 @@ void EventLoop::loop() {
 
         while (!m_quit) {
             m_activeChannels.clear();
-            m_epoller->poll(kEpollTimeMs, &m_activeChannels);
+            m_pollReturnTime = m_epoller->poll(kEpollTimeMs, &m_activeChannels);
             for (auto & item : m_activeChannels) {
-                item->handleEvent();
+                item->handleEvent(m_pollReturnTime);
             }
             doPendingFunctors();
         }

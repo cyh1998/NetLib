@@ -11,10 +11,12 @@
 #include <vector>
 #include <memory> //unique_ptr
 #include <mutex>
+#include <functional>
 #include "../Base/Noncopyable.h"
-#include "Channel.h"
+#include "../Timer/Timer.h"
 
 class Epoller;
+class Channel;
 
 using Functor = std::function<void()>;
 using ChannelList = std::vector<Channel*>;
@@ -57,6 +59,7 @@ private:
     const pid_t m_threadId;
     std::unique_ptr<Epoller> m_epoller;
     ChannelList m_activeChannels;
+    Timestamp m_pollReturnTime;
 
     int m_wakeupFd;
     std::unique_ptr<Channel> m_wakeupChannel;

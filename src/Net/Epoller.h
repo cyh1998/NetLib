@@ -9,6 +9,7 @@
 #include <map>
 #include "../Base/Noncopyable.h"
 #include "EventLoop.h"
+#include "../Timer/Timer.h"
 
 class Channel;
 struct epoll_event;
@@ -20,7 +21,7 @@ public:
     explicit Epoller(EventLoop* loop);
     ~Epoller();
 
-    void poll(int timeoutMs, ChannelList* activeChannels);
+    Timestamp poll(int timeoutMs, ChannelList* activeChannels);
     void updateChannel(Channel* channel);
     void removeChannel(Channel* channel);
     void assertInLoopThread() { m_ownerLoop->assertInLoopThread(); }

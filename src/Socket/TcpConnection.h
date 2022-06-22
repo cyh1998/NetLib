@@ -6,6 +6,7 @@
 #define NETLIB_TCPCONNECTION_H
 
 #include <string>
+#include "Buffer.h"
 #include "../Base/Noncopyable.h"
 #include "../Socket/Callbacks.h"
 #include "../Socket/InetAddress.h"
@@ -43,7 +44,7 @@ public:
 
 private:
     enum StateE { kDisconnected, kConnecting, kConnected };
-    void handleRead();
+    void handleRead(Timestamp receiveTime);
     void handleWrite();
     void handleClose();
     void handleError();
@@ -60,6 +61,7 @@ private:
     ConnectionCallback m_connectionCallback;
     MessageCallback m_messageCallback;
     CloseCallback m_closeCallback;
+    Buffer m_buffer;
 };
 
 

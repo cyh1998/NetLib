@@ -24,7 +24,7 @@ Channel::~Channel() {
 
 }
 
-void Channel::handleEvent() {
+void Channel::handleEvent(Timestamp receiveTime) {
     // 触发断开事件
     if ((m_revents & EPOLLRDHUP) && !(m_revents & EPOLLIN)) {
         if (m_closeCallback) m_closeCallback();
@@ -35,7 +35,7 @@ void Channel::handleEvent() {
     }
     // 触发可读事件
     if (m_revents & (EPOLLIN | EPOLLPRI | EPOLLRDHUP)) {
-        if (m_readCallback) m_readCallback();
+        if (m_readCallback) m_readCallback(receiveTime);
     }
     // 触发可写事件
     if (m_revents & EPOLLOUT) {

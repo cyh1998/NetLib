@@ -22,9 +22,10 @@ Epoller::~Epoller() {
     close(m_epollFd);
 }
 
-void Epoller::poll(int timeoutMs, ChannelList* activeChannels) {
+Timestamp Epoller::poll(int timeoutMs, ChannelList* activeChannels) {
     int numEvents = ::epoll_wait(m_epollFd, m_events.data(), static_cast<int>(m_events.size()), timeoutMs);
     int savedErrno = errno;
+    Timestamp now(Timestamp::Now());
     if (numEvents > 0) {
         LOG_INFO("%d events happened", numEvents);
         fillActiveChannels(numEvents, activeChannels);
@@ -39,6 +40,7 @@ void Epoller::poll(int timeoutMs, ChannelList* activeChannels) {
             LOG_ERROR("epoll_wait error!");
         }
     }
+    return now;
 }
 
 void Epoller::updateChannel(Channel *channel) {

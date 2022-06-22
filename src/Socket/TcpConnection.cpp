@@ -20,7 +20,7 @@ TcpConnection::TcpConnection(EventLoop *loop, const std::string &name, int sockf
     m_localAddr(localAddr),
     m_peerAddr(peerAddr)
 {
-    m_channel->setReadCallback(std::bind(&TcpConnection::handleRead, this));
+    m_channel->setReadCallback(std::bind(&TcpConnection::handleRead, this, std::placeholders::_1));
     m_channel->setWriteCallback(std::bind(&TcpConnection::handleWrite, this));
     m_channel->setCloseCallback(std::bind(&TcpConnection::handleClose, this));
     m_channel->setErrorCallback(std::bind(&TcpConnection::handleError, this));
@@ -49,14 +49,15 @@ void TcpConnection::connectDestroyed() {
     m_channel->remove();
 }
 
-void TcpConnection::handleRead() {
-    char buf[256];
-    ssize_t n = sockets::read(m_channel->fd(), &buf, sizeof(buf));
+void TcpConnection::handleRead(Timestamp receiveTime) {
+    int savedErrno = 0;
+    ssize_t n = m_buffer.readFd(m_channel->fd(), savedErrno);
     if (n > 0) {
-        m_messageCallback(shared_from_this(), buf, n);
+        m_messageCallback(shared_from_this(), &m_buffer, receiveTime);
     } else if (n == 0) {
         handleClose();
     } else {
+        errno = savedErrno;
         handleError();
     }
 }
