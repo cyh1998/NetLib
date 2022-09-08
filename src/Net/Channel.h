@@ -32,8 +32,10 @@ public:
     
     void enableReading() { m_events |= s_readEvent; update(); }
     void enableWriting() { m_events |= s_writeEvent; update(); }
+    void disableWriting() { m_events &= ~s_writeEvent; update(); }
     void disableAll() { m_events = s_noneEvent; update(); }
-    
+    bool isWriting() const { return m_events & s_writeEvent; }
+
     int getIndex() const { return m_index; }
     void setIndex(int idx) { m_index = idx; }
 

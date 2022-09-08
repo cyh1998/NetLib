@@ -23,6 +23,8 @@ namespace sockets
 
     void close(int sockfd);
 
+    void shutdownWrite(int sockfd);
+
     int  createNonblockingSocket();
 
     struct sockaddr_in6 getLocalAddr(int sockfd);

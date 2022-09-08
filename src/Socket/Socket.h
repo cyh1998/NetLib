@@ -23,6 +23,8 @@ public:
     void setAddrReusable(bool on) const;
     void setPortReusable(bool on) const;
 
+    void shutdownWrite();
+
 private:
     const int m_sockfd;
 };

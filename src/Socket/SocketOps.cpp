@@ -48,6 +48,12 @@ void sockets::close(int sockfd) {
     }
 }
 
+void sockets::shutdownWrite(int sockfd) {
+    if (::shutdown(sockfd, SHUT_WR) < 0) {
+        LOG_ERROR("sockets::shutdownWrite");
+    }
+}
+
 int sockets::createNonblockingSocket() {
     int sockfd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, IPPROTO_TCP);
 

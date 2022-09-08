@@ -44,3 +44,7 @@ void Socket::setPortReusable(bool on) const {
     int optval = on ? 1 : 0;
     setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEPORT, &optval, static_cast<socklen_t>(sizeof optval));
 }
+
+void Socket::shutdownWrite() {
+    sockets::shutdownWrite(m_sockfd);
+}

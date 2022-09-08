@@ -30,6 +30,10 @@ public:
     EventLoop* getLoop() const { return m_loop; }
     const std::string& name() const { return m_name; }
     bool connected() const { return m_state == kConnected; }
+
+    void send(const std::string & message);
+    void shutdown();
+
     void setConnectionCallback(const ConnectionCallback& cb)
     { m_connectionCallback = cb; }
 
@@ -43,11 +47,15 @@ public:
     void connectDestroyed();
 
 private:
-    enum StateE { kDisconnected, kConnecting, kConnected };
+    enum StateE { kDisconnecting, kDisconnected, kConnecting, kConnected };
     void handleRead(Timestamp receiveTime);
     void handleWrite();
     void handleClose();
     void handleError();
+
+    void sendInLoop(const std::string & message);
+    void shutdownInLoop();
+
     void setState(StateE s) { m_state = s; }
 
 private:
@@ -61,7 +69,8 @@ private:
     ConnectionCallback m_connectionCallback;
     MessageCallback m_messageCallback;
     CloseCallback m_closeCallback;
-    Buffer m_buffer;
+    Buffer m_inputBuffer;
+    Buffer m_outputBuffer;
 };
 
 
