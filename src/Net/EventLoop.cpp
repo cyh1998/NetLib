@@ -3,6 +3,7 @@
 //
 
 #include <sys/eventfd.h>
+#include <signal.h>
 #include "EventLoop.h"
 #include "../Log/Log.h"
 #include "Epoller.h"
@@ -21,6 +22,15 @@ namespace {
         }
         return evtfd;
     }
+
+    class IgnoreSigPipe {
+    public:
+        IgnoreSigPipe() {
+            ::signal(SIGPIPE, SIG_IGN);
+        }
+    };
+
+    IgnoreSigPipe initObj;
 }
 
 EventLoop::EventLoop() :

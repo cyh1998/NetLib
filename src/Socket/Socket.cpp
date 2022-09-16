@@ -3,6 +3,7 @@
 //
 
 #include <arpa/inet.h>
+#include <netinet/tcp.h>
 #include "InetAddress.h"
 #include "SocketOps.h"
 #include "Socket.h"
@@ -37,14 +38,24 @@ int Socket::acceptAddress(InetAddress* peeraddr) {
 
 void Socket::setAddrReusable(bool on) const {
     int optVal = on ? 1 : 0;
-    setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, &optVal, static_cast<socklen_t>(sizeof optVal));
+    ::setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, &optVal, static_cast<socklen_t>(sizeof optVal));
 }
 
 void Socket::setPortReusable(bool on) const {
-    int optval = on ? 1 : 0;
-    setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEPORT, &optval, static_cast<socklen_t>(sizeof optval));
+    int optVal = on ? 1 : 0;
+    ::setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEPORT, &optVal, static_cast<socklen_t>(sizeof optVal));
 }
 
 void Socket::shutdownWrite() {
     sockets::shutdownWrite(m_sockfd);
+}
+
+void Socket::setTcpNoDelay(bool on) {
+    int optVal = on ? 1 : 0;
+    ::setsockopt(m_sockfd, IPPROTO_TCP, TCP_NODELAY, &optVal, static_cast<socklen_t>(sizeof optVal));
+}
+
+void Socket::setKeepAlive(bool on) {
+    int optVal = on ? 1 : 0;
+    ::setsockopt(m_sockfd, SOL_SOCKET, SO_KEEPALIVE, &optVal, static_cast<socklen_t>(sizeof optVal));
 }

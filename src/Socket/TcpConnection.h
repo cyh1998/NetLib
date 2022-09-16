@@ -33,6 +33,7 @@ public:
 
     void send(const std::string & message);
     void shutdown();
+    void setTcpNoDelay(bool on);
 
     void setConnectionCallback(const ConnectionCallback& cb)
     { m_connectionCallback = cb; }

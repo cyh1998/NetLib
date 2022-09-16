@@ -24,6 +24,8 @@ TcpConnection::TcpConnection(EventLoop *loop, const std::string &name, int sockf
     m_channel->setWriteCallback(std::bind(&TcpConnection::handleWrite, this));
     m_channel->setCloseCallback(std::bind(&TcpConnection::handleClose, this));
     m_channel->setErrorCallback(std::bind(&TcpConnection::handleError, this));
+
+    m_socket->setKeepAlive(true);
 }
 
 TcpConnection::~TcpConnection() {
@@ -46,6 +48,11 @@ void TcpConnection::shutdown() {
         m_loop->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
     }
 }
+
+void TcpConnection::setTcpNoDelay(bool on) {
+    m_socket->setTcpNoDelay(on);
+}
+
 
 void TcpConnection::connectEstablished() {
     m_loop->assertInLoopThread();
@@ -110,7 +117,9 @@ void TcpConnection::handleWrite() {
 
 void TcpConnection::handleClose() {
     m_loop->assertInLoopThread();
+    setState(kDisconnected);
     m_channel->disableAll();
+    m_connectionCallback(shared_from_this());
     m_closeCallback(shared_from_this());
 }
 
