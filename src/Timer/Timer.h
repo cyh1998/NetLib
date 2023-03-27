@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <sys/time.h> //timeval gettimeofday()
 #include <functional>
-#include "../Base/Noncopyable.h"
+#include "Base/Noncopyable.h"
 
 class Timestamp {
 public:

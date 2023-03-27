@@ -10,7 +10,7 @@
 #include <mutex>
 // #include <semaphore.h>
 #include <mysql/mysql.h>
-#include "Singleton.h"
+#include "Base/Singleton.h"
 
 class SqlConnPool {
 public:

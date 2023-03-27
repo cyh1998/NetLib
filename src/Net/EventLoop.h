@@ -12,8 +12,8 @@
 #include <memory> //unique_ptr
 #include <mutex>
 #include <functional>
-#include "../Base/Noncopyable.h"
-#include "../Timer/Timer.h"
+#include "Base/Noncopyable.h"
+#include "Timer/Timer.h"
 
 class Epoller;
 class Channel;

@@ -14,7 +14,7 @@
 #include <sys/stat.h> //mkdir
 #include <sys/time.h> //gettimeofday
 #include "BlockQueue.h"
-#include "Singleton.h"
+#include "Base/Singleton.h"
 
 class ThreadObject;
 

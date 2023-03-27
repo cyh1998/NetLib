@@ -11,7 +11,7 @@
 #include <pthread.h>
 #include <mutex>
 #include <condition_variable>
-#include "../Log/Log.h"
+#include "Log/Log.h"
 
 template<typename T>
 class ThreadPool {

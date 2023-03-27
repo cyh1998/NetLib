@@ -7,7 +7,7 @@
 
 #include <functional>
 #include <pthread.h>
-#include "../Log/Log.h"
+#include "Log/Log.h"
 
 class ThreadObject {
 public:

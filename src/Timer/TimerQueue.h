@@ -8,9 +8,9 @@
 #include <set>
 #include <vector>
 #include <utility> //make_pair()
-#include "../Base/Noncopyable.h"
-#include "../Net/EventLoop.h"
-#include "../Net/Channel.h"
+#include "Base/Noncopyable.h"
+#include "Net/EventLoop.h"
+#include "Net/Channel.h"
 #include "Timer.h"
 
 class TimerQueue : Noncopyable {

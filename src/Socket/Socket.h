@@ -5,7 +5,7 @@
 #ifndef NETLIB_SOCKET_H
 #define NETLIB_SOCKET_H
 
-#include "../Base/Noncopyable.h"
+#include "Base/Noncopyable.h"
 
 class InetAddress;
 

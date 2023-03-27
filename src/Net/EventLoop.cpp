@@ -5,10 +5,10 @@
 #include <sys/eventfd.h>
 #include <signal.h>
 #include "EventLoop.h"
-#include "../Log/Log.h"
+#include "Log/Log.h"
 #include "Epoller.h"
 #include "Channel.h"
-#include "../Socket/SocketOps.h"
+#include "Socket/SocketOps.h"
 
 namespace {
     __thread EventLoop* t_loopInThisThread = nullptr;

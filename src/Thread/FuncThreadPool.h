@@ -12,7 +12,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include "../Log/Log.h"
+#include "Log/Log.h"
 
 class FuncThreadPool {
 public:

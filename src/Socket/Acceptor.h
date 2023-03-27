@@ -5,9 +5,9 @@
 #ifndef NETLIB_ACCEPTOR_H
 #define NETLIB_ACCEPTOR_H
 
-#include "../Base/Noncopyable.h"
-#include "../Net/EventLoop.h"
-#include "../Net/Channel.h"
+#include "Base/Noncopyable.h"
+#include "Net/EventLoop.h"
+#include "Net/Channel.h"
 #include "InetAddress.h"
 #include "Socket.h"
 

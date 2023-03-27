@@ -7,9 +7,9 @@
 
 #include <vector>
 #include <map>
-#include "../Base/Noncopyable.h"
+#include "Base/Noncopyable.h"
 #include "EventLoop.h"
-#include "../Timer/Timer.h"
+#include "Timer/Timer.h"
 
 class Channel;
 struct epoll_event;

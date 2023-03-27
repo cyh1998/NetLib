@@ -7,9 +7,9 @@
 
 #include <string>
 #include "Buffer.h"
-#include "../Base/Noncopyable.h"
-#include "../Socket/Callbacks.h"
-#include "../Socket/InetAddress.h"
+#include "Base/Noncopyable.h"
+#include "Socket/Callbacks.h"
+#include "Socket/InetAddress.h"
 
 class EventLoop;
 class Channel;

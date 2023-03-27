@@ -4,11 +4,11 @@
 
 #include <functional>
 #include "TcpConnection.h"
-#include "../Log/Log.h"
-#include "../Net/Channel.h"
-#include "../Net/EventLoop.h"
-#include "../Socket/Socket.h"
-#include "../Socket/SocketOps.h"
+#include "Log/Log.h"
+#include "Net/Channel.h"
+#include "Net/EventLoop.h"
+#include "Socket/Socket.h"
+#include "Socket/SocketOps.h"
 
 TcpConnection::TcpConnection(EventLoop *loop, const std::string &name, int sockfd, const InetAddress &localAddr,
                              const InetAddress &peerAddr) :

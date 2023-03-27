@@ -1,5 +1,5 @@
 include_directories(
-        PRIVATE ./Base
+        PRIVATE ./
         )
 
 set(base_SRCS

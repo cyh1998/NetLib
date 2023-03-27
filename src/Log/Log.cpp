@@ -3,7 +3,7 @@
 //
 
 #include "Log.h"
-#include "../Thread/ThreadObject.h"
+#include "Thread/ThreadObject.h"
 
 using namespace std;
 

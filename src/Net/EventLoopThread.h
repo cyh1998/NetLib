@@ -8,8 +8,8 @@
 #include <functional>
 #include <mutex>
 #include <condition_variable>
-#include "../Base/Noncopyable.h"
-#include "../Thread/ThreadObject.h"
+#include "Base/Noncopyable.h"
+#include "Thread/ThreadObject.h"
 
 class EventLoop;
 
