@@ -32,6 +32,7 @@ public:
     bool connected() const { return m_state == kConnected; }
 
     void send(const std::string & message);
+    void send(Buffer && buf);
     void shutdown();
     void setTcpNoDelay(bool on);
 
@@ -55,6 +56,7 @@ private:
     void handleError();
 
     void sendInLoop(const std::string & message);
+    void sendInLoop(const void* data, size_t len);
     void shutdownInLoop();
 
     void setState(StateE s) { m_state = s; }

@@ -48,8 +48,8 @@ set(base_SRCS
         Timer/TimerQueue.cpp
         )
 
-add_library(lib_base ${base_SRCS})
+add_library(base ${base_SRCS})
 
 find_package(Threads)
 
-target_link_libraries(lib_base ${CMAKE_THREAD_LIBS_INIT} -lrt libmysqlclient.so)
+target_link_libraries(base ${CMAKE_THREAD_LIBS_INIT} -lrt libmysqlclient.so)

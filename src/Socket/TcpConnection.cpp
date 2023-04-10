@@ -37,7 +37,22 @@ void TcpConnection::send(const std::string &message) {
         if (m_loop->isInLoopThread()) {
             sendInLoop(message);
         } else {
-            m_loop->runInLoop(std::bind(&TcpConnection::sendInLoop, this, message));
+            m_loop->runInLoop(std::bind((void (TcpConnection::*)(const std::string &))&TcpConnection::sendInLoop,
+                              this,
+                              message));
+        }
+    }
+}
+
+void TcpConnection::send(Buffer && buf) {
+    if (m_state == kConnected) {
+        if (m_loop->isInLoopThread()) {
+            sendInLoop(buf.peek(), buf.readableBytes());
+            buf.retrieveAll();
+        } else {
+            m_loop->runInLoop(std::bind((void (TcpConnection::*)(const std::string &))&TcpConnection::sendInLoop,
+                              this,
+                              buf.retrieveAllAsString()));
         }
     }
 }
@@ -128,18 +143,22 @@ void TcpConnection::handleError() {
 }
 
 void TcpConnection::sendInLoop(const std::string &message) {
+    sendInLoop(message.c_str(), message.size());
+}
+
+void TcpConnection::sendInLoop(const void *data, size_t len) {
     m_loop->assertInLoopThread();
-    ssize_t nworte = 0;
-    size_t remaining = message.size();
+    ssize_t nwrote = 0;
+    size_t remaining = len;
     if (!m_channel->isWriting() && m_outputBuffer.readableBytes() == 0) {
-        nworte = sockets::write(m_channel->fd(), message.data(), message.size());
-        if (nworte >= 0) {
-            remaining = remaining - nworte;
+        nwrote = sockets::write(m_channel->fd(), data, len);
+        if (nwrote >= 0) {
+            remaining = remaining - nwrote;
             if (remaining == 0) {
                 // writeCompleteCallback
             }
         } else {
-            nworte = 0;
+            nwrote = 0;
             if (errno != EWOULDBLOCK) {
                 // send error
             }
@@ -147,7 +166,7 @@ void TcpConnection::sendInLoop(const std::string &message) {
     }
 
     if (remaining > 0) {
-        m_outputBuffer.append(message.data() + nworte, message.size() - nworte);
+        m_outputBuffer.append(static_cast<const char*>(data) + nwrote, len - nwrote);
         if (!m_channel->isWriting()) {
             m_channel->enableWriting();
         }
