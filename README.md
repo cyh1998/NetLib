@@ -36,7 +36,8 @@ MySQL  5.7.31
 │   │   └── EventLoopThread  事件循环线程
 │   ├── Socket
 │   │   ├── Acceptor         连接接收类
-│   │   ├── Buffer           缓冲区类
+│   │   ├── Buffer           缓冲区类    
+│   │   ├── Endian           字节序转换
 │   │   ├── InetAddress      网络地址封装
 │   │   ├── Socket           文件描述符 RAII 封装
 │   │   ├── SocketOps        socket操作类
