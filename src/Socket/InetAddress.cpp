@@ -2,8 +2,8 @@
 // Created by cyh on 2021/4/28.
 //
 
-#include <endian.h>
 #include <arpa/inet.h> //inet_pton()
+#include "Endian.h"
 #include "InetAddress.h"
 
 InetAddress::InetAddress(uint16_t port, bool ifLoopback, bool ipv6)
@@ -12,13 +12,13 @@ InetAddress::InetAddress(uint16_t port, bool ifLoopback, bool ipv6)
         memset(&m_addr6, 0, sizeof(m_addr6));
         m_addr6.sin6_family = AF_INET6;
         m_addr6.sin6_addr = ifLoopback ? in6addr_loopback : in6addr_any;
-        m_addr6.sin6_port = htobe16(port);
+        m_addr6.sin6_port = hostToNetwork16(port);
     } else {
         memset(&m_addr, 0, sizeof(m_addr));
         m_addr.sin_family = AF_INET;
         in_addr_t ipType = ifLoopback ? INADDR_LOOPBACK : INADDR_ANY;
-        m_addr.sin_addr.s_addr = htobe32(ipType);
-        m_addr.sin_port = htobe16(port);
+        m_addr.sin_addr.s_addr = hostToNetwork32(ipType);
+        m_addr.sin_port = hostToNetwork16(port);
     }
 }
 

@@ -1,6 +1,6 @@
-include_directories(
-        PRIVATE ./
-        )
+find_package(Threads)
+
+include_directories(PRIVATE ./)
 
 set(base_SRCS
         Base/Condition.h
@@ -23,6 +23,7 @@ set(base_SRCS
         Socket/Buffer.h
         Socket/Buffer.cpp
         Socket/Callbacks.h
+        Socket/Endian.h
         Socket/InetAddress.h
         Socket/InetAddress.cpp
         Socket/Socket.h
@@ -49,7 +50,5 @@ set(base_SRCS
         )
 
 add_library(base ${base_SRCS})
-
-find_package(Threads)
 
 target_link_libraries(base ${CMAKE_THREAD_LIBS_INIT} -lrt libmysqlclient.so)
