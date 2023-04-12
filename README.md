@@ -4,10 +4,11 @@ Linux 下的 C++ 网络库
 
 ## 环境
 ```
-Ubuntu 18.04.4
-Linux  5.4.0
-gcc    7.5.0
-MySQL  5.7.31
+Ubuntu    18.04.4
+Linux     5.4.0
+gcc       7.5.0
+MySQL     5.7.31
+Protobuf  3.20.1
 ```
 ## 功能
 * 基于Epoll实现的Reactor模式
@@ -16,6 +17,7 @@ MySQL  5.7.31
 * 模板类线程池与函数对象线程池
 * 基于set实现的定时器容器
 * 基于queue实现的简单数据库连接池
+* 基于Protobuf的协议编/解码及分发
 
 ## 目录
 ```
@@ -34,6 +36,8 @@ MySQL  5.7.31
 │   │   ├── Epoller          IO多路复用
 │   │   ├── EventLoop        事件循环
 │   │   └── EventLoopThread  事件循环线程
+|   ├── Protobuf
+|   │   └── Codec            协议编/解码类
 │   ├── Socket
 │   │   ├── Acceptor         连接接收类
 │   │   ├── Buffer           缓冲区类    
