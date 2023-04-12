@@ -1,6 +1,5 @@
-find_package(Threads)
-
-include_directories(PRIVATE ./)
+include_directories(PRIVATE ${PROJECT_SOURCE_DIR}/src)
+include_directories(Protobuf ${Protobuf_INCLUDE_DIR})
 
 set(base_SRCS
         Base/Condition.h
@@ -51,4 +50,4 @@ set(base_SRCS
 
 add_library(base ${base_SRCS})
 
-target_link_libraries(base ${CMAKE_THREAD_LIBS_INIT} -lrt libmysqlclient.so)
+target_link_libraries(base ${Protobuf_LIBRARIES} pthread -lrt libmysqlclient.so)
