@@ -19,6 +19,7 @@ set(base_SRCS
         Net/Epoller.cpp
         Protobuf/Codec.h
         Protobuf/Codec.cpp
+        Protobuf/Dispatcher.h
         Protobuf/google-inl.h
         Socket/Acceptor.h
         Socket/Acceptor.cpp
