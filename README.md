@@ -37,7 +37,8 @@ Protobuf  3.20.1
 │   │   ├── EventLoop        事件循环
 │   │   └── EventLoopThread  事件循环线程
 |   ├── Protobuf
-|   │   └── Codec            协议编/解码类
+│   │   ├── Codec            协议编/解码类
+|   │   └── Dispatcher       协议分发类
 │   ├── Socket
 │   │   ├── Acceptor         连接接收类
 │   │   ├── Buffer           缓冲区类    
